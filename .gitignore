@@ -1,0 +1,8 @@
+
+*.suo
+*.lock
+*.ide
+bin/
+obj/
+*.testlog
+*.manifest
