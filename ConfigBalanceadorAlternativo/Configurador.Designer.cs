@@ -38,6 +38,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.AliasServidorSecundario = new System.Windows.Forms.TextBox();
+            this.Agrupamento = new System.Windows.Forms.GroupBox();
+            this.AbrirServidorSecundario = new System.Windows.Forms.Button();
+            this.AbrirConfiguracaoSecundario = new System.Windows.Forms.Button();
+            this.EnderecoGit = new System.Windows.Forms.LinkLabel();
+            this.Agrupamento.SuspendLayout();
             this.SuspendLayout();
             // 
             // CaminhoArquivo
@@ -129,11 +134,54 @@
             this.AliasServidorSecundario.Size = new System.Drawing.Size(139, 20);
             this.AliasServidorSecundario.TabIndex = 10;
             // 
+            // Agrupamento
+            // 
+            this.Agrupamento.Controls.Add(this.AbrirConfiguracaoSecundario);
+            this.Agrupamento.Controls.Add(this.AbrirServidorSecundario);
+            this.Agrupamento.Location = new System.Drawing.Point(12, 169);
+            this.Agrupamento.Name = "Agrupamento";
+            this.Agrupamento.Size = new System.Drawing.Size(593, 58);
+            this.Agrupamento.TabIndex = 11;
+            this.Agrupamento.TabStop = false;
+            // 
+            // AbrirServidorSecundario
+            // 
+            this.AbrirServidorSecundario.Location = new System.Drawing.Point(6, 19);
+            this.AbrirServidorSecundario.Name = "AbrirServidorSecundario";
+            this.AbrirServidorSecundario.Size = new System.Drawing.Size(159, 23);
+            this.AbrirServidorSecundario.TabIndex = 0;
+            this.AbrirServidorSecundario.Text = "Executar servidor secundário";
+            this.AbrirServidorSecundario.UseVisualStyleBackColor = true;
+            this.AbrirServidorSecundario.Click += new System.EventHandler(this.AbrirServidorSecundario_Click);
+            // 
+            // AbrirConfiguracaoSecundario
+            // 
+            this.AbrirConfiguracaoSecundario.Location = new System.Drawing.Point(171, 19);
+            this.AbrirConfiguracaoSecundario.Name = "AbrirConfiguracaoSecundario";
+            this.AbrirConfiguracaoSecundario.Size = new System.Drawing.Size(196, 23);
+            this.AbrirConfiguracaoSecundario.TabIndex = 1;
+            this.AbrirConfiguracaoSecundario.Text = "Abrir spCfg.ini do servidor secundário";
+            this.AbrirConfiguracaoSecundario.UseVisualStyleBackColor = true;
+            this.AbrirConfiguracaoSecundario.Click += new System.EventHandler(this.AbrirConfiguracaoSecundario_Click);
+            // 
+            // EnderecoGit
+            // 
+            this.EnderecoGit.AutoSize = true;
+            this.EnderecoGit.Location = new System.Drawing.Point(310, 230);
+            this.EnderecoGit.Name = "EnderecoGit";
+            this.EnderecoGit.Size = new System.Drawing.Size(295, 13);
+            this.EnderecoGit.TabIndex = 12;
+            this.EnderecoGit.TabStop = true;
+            this.EnderecoGit.Text = "https://github.com/cucouniuv/ConfigBalanceadorAlternativo";
+            this.EnderecoGit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.EnderecoGit_LinkClicked);
+            // 
             // Configurador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 177);
+            this.ClientSize = new System.Drawing.Size(619, 249);
+            this.Controls.Add(this.EnderecoGit);
+            this.Controls.Add(this.Agrupamento);
             this.Controls.Add(this.AliasServidorSecundario);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -148,8 +196,9 @@
             this.Name = "Configurador";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Configurar Balanceador Alternativo";
+            this.Text = "Configurar Balanceador Alternativo (PG->PG ou SG->SG)";
             this.Load += new System.EventHandler(this.Configurador_Load);
+            this.Agrupamento.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +215,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox AliasServidorSecundario;
+        private System.Windows.Forms.GroupBox Agrupamento;
+        private System.Windows.Forms.Button AbrirConfiguracaoSecundario;
+        private System.Windows.Forms.Button AbrirServidorSecundario;
+        private System.Windows.Forms.LinkLabel EnderecoGit;
     }
 }
 

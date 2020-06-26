@@ -53,7 +53,7 @@ namespace ConfigBalanceadorAlternativo
         {
             if (CaminhoArquivo.Text.Trim().Length == 0)
             {
-                throw new ArgumentException("Caminho do arquivo precisa ser preenchido.");
+                throw new ArgumentException("Caminho do seu servidor principal precisa ser preenchido.");
             }
 
             string path = Path.GetDirectoryName(CaminhoArquivo.Text.Trim());
@@ -87,8 +87,25 @@ namespace ConfigBalanceadorAlternativo
 
             if (Directory.Exists(pathSecundario))
             {
+                /*WatcherDiretorio.Path = path;
+                WatcherDiretorio.NotifyFilter = NotifyFilters.DirectoryName;
+
+                WatcherDiretorio.Deleted += (sender, evento) =>
+                {
+                    if (evento.FullPath == pathSecundario)
+                    {
+                        Directory.CreateDirectory(pathSecundario);
+                    }
+                };*/
+
                 Directory.Delete(pathSecundario, true);
             }
+
+            DirectoryInfo _directoryInfo = new DirectoryInfo(pathSecundario);
+            _directoryInfo.Refresh();
+
+            while (_directoryInfo.Exists)
+                _directoryInfo.Refresh();
 
             Directory.CreateDirectory(pathSecundario);
         }
@@ -193,6 +210,75 @@ namespace ConfigBalanceadorAlternativo
         private void Configurador_Load(object sender, EventArgs e)
         {
             GuidServidorSecundario.SelectedIndex = 0;
+        }
+
+        private void AbrirServidorSecundario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AbrirServidorSecundarioEvent();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(erro.Message);
+            }            
+        }
+
+        private void AbrirServidorSecundarioEvent()
+        {
+            if (CaminhoArquivo.Text.Trim().Length == 0)
+            {
+                throw new ArgumentException("Caminho do seu servidor principal precisa ser preenchido.");
+            }
+
+            string pathOrigem = Path.GetDirectoryName(CaminhoArquivo.Text.Trim());
+
+            string nomeArquivoDestino = Path.GetFileNameWithoutExtension(CaminhoArquivo.Text.Trim()) + "01.exe";
+
+            string pathDestino = Path.Combine(pathOrigem, "ServidorSecundario", nomeArquivoDestino);
+
+            if (!File.Exists(pathDestino))
+            {
+                throw new ArgumentException(String.Format("Arquivo {0} não encontrado.", nomeArquivoDestino));
+            }
+
+            System.Diagnostics.Process.Start(pathDestino);
+        }
+
+        private void AbrirConfiguracaoSecundario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AbrirConfiguracaoSecundarioEvent();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(erro.Message);
+            }
+        }
+
+        private void AbrirConfiguracaoSecundarioEvent()
+        {
+            if (CaminhoArquivo.Text.Trim().Length == 0)
+            {
+                throw new ArgumentException("Caminho do seu servidor principal precisa ser preenchido.");
+            }
+
+            string pathOrigem = Path.GetDirectoryName(CaminhoArquivo.Text.Trim());
+
+            string pathDestino = Path.Combine(pathOrigem, "ServidorSecundario", "spCfg.ini");
+
+            if (!File.Exists(pathDestino))
+            {
+                throw new ArgumentException("Arquivo spCfg.ini não encontrado no diretório secundário.");
+            }
+
+            System.Diagnostics.Process.Start(pathDestino);
+        }
+
+        private void EnderecoGit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/cucouniuv/ConfigBalanceadorAlternativo");
         }
     }
 }
